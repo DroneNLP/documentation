@@ -1,4 +1,4 @@
-# Data Collection & Initial Scope
+# Data Collection Procedure
 
 This section details the comprehensive process undertaken to collect the raw drone flight log messages that form the foundation of our NLP analysis. Our data sources include publicly available information from AirData UAV and forensic artifacts from VTO Labs.
 
@@ -35,22 +35,13 @@ In addition to AirData, a significant portion of our raw data was derived from f
 
     !!! info "Detailed Extraction Guide"
         For a comprehensive, step-by-step guide on how we extracted and decrypted these flight log files from the VTO Labs forensic images, please refer to our dedicated blog post:
-        [:octicons-arrow-right-24: Extracting Flight Logs from VTO Labs Forensic Images](../blog/vto-labs-extraction.md)
+        [:octicons-arrow-right-24: Extracting Flight Logs from VTO Labs Forensic Images](../blog/posts/vto-labs-extraction.md)
 
 
 * **Extraction and Decryption Process:**
     The extraction process for VTO Labs data involved the following steps:
 
     1.  **Controller Log Identification:** For each drone model and dataset ID, all flight log files originating from the `controller_device` artifact were identified.
-    <!-- 2.  **Local Storage Structure:** These raw, encrypted flight logs were organized and stored locally using the following hierarchical folder structure to maintain provenance:
-        ```
-        Drone_Model/
-        ├── DatasetID/
-        │   └── YYYY_Month/
-        │       └── controller_device/
-        │           └── DJIFlightRecord_YYYY-MM-DD_[HH-MM-SS].txt
-        ```
-        *Example Filename:* `DJIFlightRecord_2017-08-29_[14-30-27].txt` -->
     3.  **Decryption:** The raw `.txt` flight log files from DJI drones are typically encrypted. To obtain human-readable messages, each file was individually decrypted using the **DJI Phantom Help Log Viewer** online tool.
         * **Tool Used:** [https://www.phantomhelp.com/logviewer/upload/](https://www.phantomhelp.com/logviewer/upload/)
         * **Procedure:** Each encrypted `.txt` log file was uploaded to the Phantom Help Log Viewer, decrypted, and then the resulting human-readable data was downloaded as a `.csv` file. This was a manual, file-by-file process.

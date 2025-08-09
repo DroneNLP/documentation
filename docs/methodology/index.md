@@ -28,13 +28,13 @@ Our approach is structured around the following interconnected phases:
 
     Detailed guidelines for how flight log messages were annotated for various NLP tasks, ensuring consistency and high inter-annotator agreement.
 
-    [:octicons-arrow-right-24: Learn More](general-annotation.md)
+    [:octicons-arrow-right-24: Learn More](../tasks/index.md)
 
 -   :material-scale-balance:{ .lg .middle } __Justification & Standards__
 
     How our annotation guidelines and cleansing decisions are grounded in existing aviation regulations and standard documents (e.g., FAA, NTSB, INTERPOL).
 
-    [:octicons-arrow-right-24: Learn More](annotation-justification.md)
+    [:octicons-arrow-right-24: Learn More](../tasks/index.md)
 
 </div>
 

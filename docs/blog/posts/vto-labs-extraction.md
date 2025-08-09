@@ -1,7 +1,15 @@
-# Extracting Flight Logs from VTO Labs Forensic Images
-
-**Date:** July 23, 2025
-**Author:** S. Silalahi
+---
+title: Extracting Flight Logs from VTO Labs Forensic Images
+author: S. Silalahi
+date: 2025-07-23
+categories:
+  - How-to Guide
+  - Data Collection
+tags:
+  - VTO Labs
+  - Forensics
+  - Data Extraction
+---
 
 This blog post provides a detailed, step-by-step walkthrough of the process we employed to extract and decrypt human-readable flight log messages from the forensic images of drone controller devices, as sourced from the VTO Labs Drone Forensics Program. This process was a crucial part of building our comprehensive "NLP for Drone Flight Log Analysis" dataset.
 
@@ -14,6 +22,37 @@ The VTO Labs dataset (accessible via [https://drive.google.com/drive/folders/1-U
 ## 2. Locating and Extracting Flight Log Files from Controller Artifacts
 
 The VTO Labs collection of drone images includes data acquired from various controller devices, specifically **Android phones**, **Android tablets**, and **iOS phones**. The extraction methodology varies slightly depending on the operating system and artifact file type. Our goal was to identify and extract files containing human-readable log messages.
+
+```mermaid
+graph TD
+    A[Drone Images from Controller devices] --> B{Android}
+    A --> C{Tablet}
+    A --> D{iOS}
+
+    B --> E[File with .001 extension]
+    C --> F[File with .zip extension]
+    D --> G[File with .zip extension]
+
+    E --> H[Extract using Autopsy]
+    F --> I[Extract using Unzip]
+    G --> J[Extract using Autopsy]
+
+    H --> K[Flight log with .TXT extension]
+    H --> L[Error pop log with no extension]
+    I --> L
+    I --> K
+    J --> M[Flight log with no extension]
+
+    K --> N[Decrypt using DJI Phantom Help]
+    L --> N
+
+    N --> O[Flight log with .csv extension]
+
+    O --> P[Parsing using python script]
+    M --> P
+
+    P --> Q[csv file forensic timeline]
+```
 
 ### 2.1. Android-Based Controllers (Phones & Tablets)
 
