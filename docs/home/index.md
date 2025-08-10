@@ -13,7 +13,7 @@ Welcome to the central hub for the "NLP for Drone Flight Log Analysis" research 
 
     Access our meticulously curated and publicly available dataset of drone flight log messages. Designed for NLP model development and evaluation, it includes diverse messages from real-world operations, meticulously cleansed and annotated.
 
-    [:octicons-arrow-right-24: Explore the Dataset Challenges](dataset/)
+    [:octicons-arrow-right-24: Explore the Dataset Challenges](../tasks)
 
 -   :material-book-open-variant:{ .lg .middle } __Transparent Methodology__
 
@@ -21,7 +21,7 @@ Welcome to the central hub for the "NLP for Drone Flight Log Analysis" research 
 
     Dive deep into our rigorous research process, from data collection and comprehensive cleansing procedures to our annotation guidelines, all justified by established aviation standards and regulations.
 
-    [:octicons-arrow-right-24: View Methodology](methodology/)
+    [:octicons-arrow-right-24: View Methodology](../methodology/)
 
 -   :material-magnify-scan:{ .lg .middle } __"Forensic Challenges"__
 
@@ -29,7 +29,7 @@ Welcome to the central hub for the "NLP for Drone Flight Log Analysis" research 
 
     Evaluate your NLP models against our specialized test sets presented as real-world flight incident "forensic challenges," each with detailed ground truth for various analytical tasks.
 
-    [:octicons-arrow-right-24: Discover Challenges](dataset/)
+    [:octicons-arrow-right-24: Discover Challenges](../tasks)
 
 -   :material-download:{ .lg .middle } __Seamless Data Access__
 
@@ -37,7 +37,7 @@ Welcome to the central hub for the "NLP for Drone Flight Log Analysis" research 
 
     All our datasets are hosted on Zenodo (forthcoming), offering easy and programmatic access via CLI tools for researchers and developers worldwide.
 
-    [:octicons-arrow-right-24: Download Data](download/)
+    [:octicons-arrow-right-24: Download Data](../download.md)
 
 </div>
 

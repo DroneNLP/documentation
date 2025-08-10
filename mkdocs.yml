@@ -5,6 +5,7 @@ site_author: Swardiantara Silalahi
 
 theme:
   name: material
+  custom_dir: overrides
   features:
     - navigation.indexes
     - navigation.tabs
@@ -97,7 +98,5 @@ plugins:
       categories_dir: blog/categories
       authors_dir: blog/authors
       post_template: blog/post.html
-extra_javascript:
-  - assets/js/analytics.js
 
 copyright: Copyright &copy; 2025 Net-centric Computing Lab
