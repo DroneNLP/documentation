@@ -1,0 +1,1536 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Unlocking Insights from Drone Flight Logs with NLP.">
+      
+      
+        <meta name="author" content="Swardiantara Silalahi">
+      
+      
+        <link rel="canonical" href="https://dronenlp.github.io/documentation/tasks/event-recognition/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../problem-identification/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Event Recognition - NLP for Drone Flight Log Analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3C0FJ9JKE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-C3C0FJ9JKE');
+  </script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#event-recognition-task-definition-annotation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="NLP for Drone Flight Log Analysis" class="md-header__button md-logo" aria-label="NLP for Drone Flight Log Analysis" data-md-component="logo">
+      
+  <img src="../../assets/logo_ncc.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NLP for Drone Flight Log Analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Event Recognition
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../home/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../methodology/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Data Preparation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Tasks & Datasets
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../publications/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Publications
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../blog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Blog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../download/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Dataset Download
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NLP for Drone Flight Log Analysis" class="md-nav__button md-logo" aria-label="NLP for Drone Flight Log Analysis" data-md-component="logo">
+      
+  <img src="../../assets/logo_ncc.png" alt="logo">
+
+    </a>
+    NLP for Drone Flight Log Analysis
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../home/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About the Project
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/contact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../methodology/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Data Preparation
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data Preparation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../methodology/data-collection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Collection
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../methodology/cleansing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Cleansing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../methodology/data-splitting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Splitting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Tasks & Datasets
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tasks & Datasets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Event Recognition
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Event Recognition
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-task-overview-investigative-relevance" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Task Overview &amp; Investigative Relevance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Task Overview &amp; Investigative Relevance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-the-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. The Challenge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-justification-for-forensic-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Justification for Forensic Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-investigative-questions-answered" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. Investigative Questions Answered
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-task-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Task Formulation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Task Formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-task-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Task Definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-granularity-tagging-scheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. Granularity &amp; Tagging Scheme
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-output-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. Output Format
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dataset-annotation-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Dataset Annotation Procedure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Dataset Annotation Procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-annotation-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Annotation Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-segment-separation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Segment Separation Rules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-guidelines-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3. Guidelines &amp; Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../problem-identification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Problem Identification
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../log-abstraction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Log Abstraction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../term-extraction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Term Extraction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../semantic-role-labeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Semantic Role Labeling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../publications/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Publications
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Publications
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../publications/problem-identification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Problem Identification
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../publications/term-extraction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Term Extraction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../publications/sequence-mining/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sequence Mining
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../download/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dataset Download
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-task-overview-investigative-relevance" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Task Overview &amp; Investigative Relevance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Task Overview &amp; Investigative Relevance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-the-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. The Challenge
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-justification-for-forensic-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Justification for Forensic Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-investigative-questions-answered" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. Investigative Questions Answered
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-task-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Task Formulation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Task Formulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-task-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Task Definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-granularity-tagging-scheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. Granularity &amp; Tagging Scheme
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-output-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. Output Format
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dataset-annotation-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Dataset Annotation Procedure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Dataset Annotation Procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-annotation-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Annotation Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-segment-separation-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Segment Separation Rules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-guidelines-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3. Guidelines &amp; Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="event-recognition-task-definition-annotation">Event Recognition: Task Definition &amp; Annotation<a class="headerlink" href="#event-recognition-task-definition-annotation" title="Permanent link">&para;</a></h1>
+<p>The ability to automatically identify key events from drone flight log messages is fundamental for building a forensic timeline and gaining a high-level overview of an incident. This section details the Event Recognition task within our proposed NLP framework.</p>
+<hr />
+<h2 id="1-task-overview-investigative-relevance">1. Task Overview &amp; Investigative Relevance<a class="headerlink" href="#1-task-overview-investigative-relevance" title="Permanent link">&para;</a></h2>
+<h3 id="11-the-challenge">1.1. The Challenge<a class="headerlink" href="#11-the-challenge" title="Permanent link">&para;</a></h3>
+<p>In any forensic investigation, the first step is often to establish a clear timeline of events. For drone incidents, this means sifting through a continuous stream of messages to find specific moments like "takeoff," "landing," or "return to home." Manually identifying these events is tedious and can obscure the bigger picture of what transpired during a flight.</p>
+<h3 id="12-justification-for-forensic-analysis">1.2. Justification for Forensic Analysis<a class="headerlink" href="#12-justification-for-forensic-analysis" title="Permanent link">&para;</a></h3>
+<p>Events are the primary regions of interest in forensic analysis. By distinguishing event-related sentences from non-event sentences, we can significantly improve the effectiveness of an investigation. Compiling these events into a chronologically ordered list provides a brief but crucial overview of the incident, allowing investigators to quickly focus on the most relevant parts of the flight log.</p>
+<h3 id="13-investigative-questions-answered">1.3. Investigative Questions Answered<a class="headerlink" href="#13-investigative-questions-answered" title="Permanent link">&para;</a></h3>
+<p>By performing Event Recognition, our framework helps answer questions that are foundational to any drone incident investigation:</p>
+<ul>
+<li>What was the exact sequence of key flight events?</li>
+<li>When did the drone take off, reach its maximum altitude, or land?</li>
+<li>Did the drone initiate a "Return to Home" (RTH) command, and if so, when?</li>
+<li>Was there a transition between different flight modes (e.g., from P-mode to S-mode) and at what point in the flight?</li>
+<li>When did a specific event of interest (e.g., a "gimbal recenter" command) occur?</li>
+</ul>
+<hr />
+<h2 id="2-task-formulation">2. Task Formulation<a class="headerlink" href="#2-task-formulation" title="Permanent link">&para;</a></h2>
+<h3 id="21-task-definition">2.1. Task Definition<a class="headerlink" href="#21-task-definition" title="Permanent link">&para;</a></h3>
+<p>Event Recognition is defined as the process of extracting and classifying specific flight events from within drone log messages. Unlike problems, which are often indicative of a negative or anomalous state, events represent significant actions or transitions in the drone's flight status.</p>
+<h3 id="22-granularity-tagging-scheme">2.2. Granularity &amp; Tagging Scheme<a class="headerlink" href="#22-granularity-tagging-scheme" title="Permanent link">&para;</a></h3>
+<p>We formulate Event Recognition as a <strong>Sequence Labeling</strong> task, specifically using a <strong>BIOES tagging scheme</strong> (Begin, Inside, Outside, End, Single). This scheme allows us to precisely identify the boundaries of multi-word event mentions and single-word events. The two entity types we are tagging are:</p>
+<ul>
+<li><strong>Event</strong>: Represents a specific action, transition, or command.</li>
+<li><strong>NonEvent</strong>: Represents words that are outside of an event mention.</li>
+</ul>
+<h3 id="23-output-format">2.3. Output Format<a class="headerlink" href="#23-output-format" title="Permanent link">&para;</a></h3>
+<p>The output for this task is a sequence of tokens with their corresponding BIOES tags, providing a clear and structured representation of the events in each message. The following table provides an example:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Token</th>
+<th style="text-align: left;"><code>Switched</code></th>
+<th style="text-align: left;"><code>to</code></th>
+<th style="text-align: left;"><code>S</code></th>
+<th style="text-align: left;"><code>(Sport)-mode</code></th>
+<th style="text-align: left;"><code>.</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Tag</strong></td>
+<td style="text-align: left;"><code>B-Event</code></td>
+<td style="text-align: left;"><code>I-Event</code></td>
+<td style="text-align: left;"><code>I-Event</code></td>
+<td style="text-align: left;"><code>E-Event</code></td>
+<td style="text-align: left;"><code>O</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-dataset-annotation-procedure">3. Dataset Annotation Procedure<a class="headerlink" href="#3-dataset-annotation-procedure" title="Permanent link">&para;</a></h2>
+<h3 id="31-annotation-schema">3.1. Annotation Schema<a class="headerlink" href="#31-annotation-schema" title="Permanent link">&para;</a></h3>
+<p>The annotation schema for Event Recognition is straightforward, focusing on identifying the textual spans that correspond to a specific event. We have defined <strong>two primary entity types</strong>: <code>Event</code> and <code>NonEvent</code>.</p>
+<h3 id="32-segment-separation-rules">3.2. Segment Separation Rules<a class="headerlink" href="#32-segment-separation-rules" title="Permanent link">&para;</a></h3>
+<p>To avoid over-complicating the annotation and ensure consistency, we treat the following punctuation marks as segment separators:
+<strong>Period <code>.</code></strong>
+<strong>Colon <code>:</code></strong>
+<strong>Comma <code>,</code></strong></p>
+<p>Each segment will be assigned either an <code>Event</code> or <code>NonEvent</code> entity type. Complex or compound messages that are not clearly separated will be left for future analysis to maintain a high degree of annotation consistency for the current scope.</p>
+<h3 id="33-guidelines-examples">3.3. Guidelines &amp; Examples<a class="headerlink" href="#33-guidelines-examples" title="Permanent link">&para;</a></h3>
+<p>Annotators are instructed to identify any message that describes a change in state or an action taken by the drone or its operator.</p>
+<ul>
+<li>
+<p><strong>Positive Examples:</strong></p>
+<ul>
+<li>"Switched to S (Sport)-mode."</li>
+<li>"Aircraft is returning to the Home Point."</li>
+<li>"Reaching maximum altitude..."</li>
+<li>"Gimbal Recenter."</li>
+</ul>
+</li>
+<li>
+<p><strong>Negative Examples:</strong>
+    These messages are classified as <code>NonEvent</code> because they are informational, instructional, or directive, and do not imply an action, system response, occurring event, current environment situation, nor change of state.</p>
+<ul>
+<li>"Data Recorder File Index is nnn"</li>
+<li>"Fly with caution"</li>
+<li>"Always fly in compliance with altitude limitations"</li>
+<li>"Manually adjust flight route or return to home"</li>
+</ul>
+</li>
+</ul>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: NLP Tasks &amp;amp; Datasets for Drone Log Analysis">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                NLP Tasks &amp; Datasets for Drone Log Analysis
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../problem-identification/" class="md-footer__link md-footer__link--next" aria-label="Next: Problem Identification">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Problem Identification
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Net-centric Computing Lab
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.tabs", "navigation.sections", "navigation.footer", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  </body>
+</html>
