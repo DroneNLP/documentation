@@ -52,6 +52,9 @@ nav:
     - Log Abstraction: tasks/log-abstraction.md
     - Term Extraction: tasks/term-extraction.md
     - Semantic Role Labeling: tasks/semantic-role-labeling.md
+  - Tools:
+    - tools/index.md
+    - DFLER: tools/dfler.md
   - Publications:
     - publications/index.md
     - Problem Identification: publications/problem-identification.md
