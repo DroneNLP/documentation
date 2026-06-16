@@ -57,9 +57,10 @@ nav:
     - DFLER: tools/dfler.md
   - Publications:
     - publications/index.md
+    - Event Recognition: publications/event-recognition.md
     - Problem Identification: publications/problem-identification.md
-    - Term Extraction: publications/term-extraction.md
     - Sequence Mining: publications/sequence-mining.md
+    - Term Extraction: publications/term-extraction.md
   - Blog: blog/index.md
   - Dataset Download: download.md
 

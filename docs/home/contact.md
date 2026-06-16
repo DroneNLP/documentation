@@ -9,7 +9,7 @@ We welcome contributions, questions, and feedback from researchers, developers, 
 For general inquiries, collaborations, or partnership opportunities, you can reach out to the project team directly. For specific technical feedback, we encourage you to use our GitHub repository.
 
 * **Primary Contact Email:**
-    * tohari[at]its.ac.id, swardyantara[at]gmail.com
+    * swardyantara[at]gmail.com, tohari[at]its.ac.id, hudan[at]its.ac.id
 
 * **GitHub Issues (Recommended for Technical Feedback):**
     * For reporting bugs in our code or documentation, suggesting new features, or discussing specific aspects of the dataset, please open a new issue on our GitHub repository.

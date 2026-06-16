@@ -6,19 +6,24 @@ This page lists research publications that have utilized the DroneNLP **Term Ext
 
 ## Our Publications
 
+#### Towards terms definition extraction in drone forensics using large language model
+
+Swardiantara Silalahi, Tohari Ahmad*, Hudan Studiawan <br>
+Intelligent Systems with Applications, 2026 [:simple-doi: DOI](https://doi.org/10.1016/j.iswa.2026.200655) [:fontawesome-brands-github: Code](https://github.com/swardiantara/drone-definition)
+
 #### Transformer-Based Named Entity Recognition on Drone Flight Logs to Support Forensic Investigation
 
-Swardiantara Silalahi, Tohari Ahmad, Hudan Studiawan <br>
+Swardiantara Silalahi, Tohari Ahmad*, Hudan Studiawan <br>
 IEEE Access, 2023 [:simple-doi: DOI](https://doi.org/10.1109/ACCESS.2023.3234605) [:fontawesome-brands-github: Code](https://github.com/swardiantara/droner-cosine)
 
 ####  DroNER: Dataset for drone named entity recognition
 
-Swardiantara Silalahi, Tohari Ahmad, Hudan Studiawan <br>
+Swardiantara Silalahi, Tohari Ahmad*, Hudan Studiawan <br>
 Data in Brief, 2023 [:simple-doi: DOI](https://doi.org/10.1016/j.dib.2023.109179) [:material-database-plus-outline: Data](https://data.mendeley.com/datasets/fwcjyc754h/1)
 
 #### DFLER: Drone Flight Log Entity Recognizer to Support Forensic Investigation on Drone Device
 
-Swardiantara Silalahi, Tohari Ahmad, Hudan Studiawan <br>
+Swardiantara Silalahi, Tohari Ahmad*, Hudan Studiawan <br>
 Software Impacts, 2023 [:simple-doi: DOI](https://doi.org/10.1016/j.simpa.2022.100457) [:fontawesome-brands-github: Code](https://github.com/swardiantara/dfler/)
 
 ####  Named Entity Recognition for Drone Forensic Using BERT and DistilBERT

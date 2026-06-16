@@ -6,6 +6,21 @@ This page provides an overview of research publications associated with the **Dr
 
 ## Recent Publications
 
+#### DroPTC: Sentence-level drone flight log forensics using contrastive learning and explainable AI
+
+Swardiantara Silalahi, Tohari Ahmad, Hudan Studiawan*, Frank Breitinger  <br>
+DFRWS EU, 2026 [:simple-doi: DOI](https://doi.org/10.1016/j.fsidi.2026.302051) [:fontawesome-brands-github: Code](https://github.com/swardiantara/droptc-dev)
+
+#### Towards terms definition extraction in drone forensics using large language model
+
+Swardiantara Silalahi, Tohari Ahmad*, Hudan Studiawan <br>
+Intelligent Systems with Applications, 2026 [:simple-doi: DOI](https://doi.org/10.1016/j.iswa.2026.200655) [:fontawesome-brands-github: Code](https://github.com/swardiantara/drone-definition)
+
+#### Automated event recognition in drone flight logs: a noise-robust approach
+
+Swardiantara Silalahi, Tohari Ahmad, Hudan Studiawan <br>
+International Journal of Pervasive Computing and Communications, 2026 [:simple-doi: DOI](https://doi.org/10.1108/IJPCC-02-2025-0082) [:fontawesome-brands-github: Code](https://github.com/swardiantara/ADFLER)
+
 #### Interpretable Ordinal-Aware With Contrastive-Enhanced Anomaly Severity Detection on UAV Flight Log Messages
 
 Swardiantara Silalahi, Tohari Ahmad, Hudan Studiawan, Eirini Anthi, Lowri Williams <br>
