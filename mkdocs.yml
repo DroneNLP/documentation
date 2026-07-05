@@ -55,6 +55,8 @@ nav:
   - Tools:
     - tools/index.md
     - DFLER: tools/dfler.md
+    - ADFLER: tools/adfler.md
+    - LogNexus: tools/lognexus.md
   - Publications:
     - publications/index.md
     - Event Recognition: publications/event-recognition.md
